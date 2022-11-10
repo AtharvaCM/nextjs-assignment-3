@@ -11,7 +11,8 @@
         "map": [
           ["@/components/*", "./src/components/*"],
           ["@/pages/*", "./pages"],
-          ["@/styles/*", "./src/styles/*"]
+          ["@/styles/*", "./src/styles/*"],
+          ["@/queries/*", "./src/queries/*"]
         ],
         "extensions": [".js", ".jsx", ".svg", ".png", ".ts", ".tsx"]
       }
