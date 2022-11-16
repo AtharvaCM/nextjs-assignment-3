@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { ReactNode } from "react";
 import Button from "../button";
 import ButtonOutline from "../button-outline";
@@ -25,27 +26,33 @@ const Card: React.FC<CardPropsType> = ({
 }) => {
   return (
     <div className="flex justify-center">
-      <div className="rounded-lg shadow-lg bg-white max-w-sm flex flex-col flex-1">
+      <div className="flex max-w-sm flex-1 flex-col rounded-lg bg-white shadow-lg">
         {/* Image */}
         <div>
-          <a href={href} data-mdb-ripple="true" data-mdb-ripple-color="light">
-            <figure className="h-[13rem]" role={"figure"}>
-              <img className="rounded-t-lg h-full w-full" src={src} alt={alt} />
-            </figure>
-          </a>
-          <span className="absolute p-1 mt-[-1rem] bg-black text-white">
+          <Link href={href}>
+            <a data-mdb-ripple="true" data-mdb-ripple-color="light">
+              <figure className="h-[13rem]" role={"figure"}>
+                <img
+                  className="h-full w-full rounded-t-lg"
+                  src={src}
+                  alt={alt}
+                />
+              </figure>
+            </a>
+          </Link>
+          <span className="absolute mt-[-1rem] bg-black p-1 text-white">
             ${price}
           </span>
         </div>
         {/* Content */}
-        <div className="px-6 pt-6 flex-1">
-          <h5 className="text-gray-900 text-xl font-medium mb-2">
+        <div className="flex-1 px-6 pt-6">
+          <h5 className="mb-2 text-xl font-medium text-gray-900">
             {cardTitle}
           </h5>
           {children}
         </div>
         {/* Card Actions */}
-        <div className="px-6 pb-6 flex justify-between mt-auto">
+        <div className="mt-auto flex justify-between px-6 pb-6">
           <Button title={btnTitle} />
           <ButtonOutline title={btnOutlineTitle} />
         </div>

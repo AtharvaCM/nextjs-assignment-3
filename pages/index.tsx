@@ -88,7 +88,7 @@ const Home: NextPage<HomePagePropsType> = ({ data, pageInfo }) => {
                 key={car.id}
                 src={car.image}
                 alt={""}
-                href={car.vehicleKey}
+                href={`cars-for-sale/car/${car.id}`}
                 price={+car.price}
                 cardTitle={`${car.year} ${car.makeName} ${car.modelName}`}
                 btnTitle={"Enquire Now"}

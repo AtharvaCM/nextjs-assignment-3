@@ -72,3 +72,18 @@ export const LOAD_MORE_DEALER_LISTINGS: QueryOptions<OperationVariables, any> =
       }
     `,
   };
+
+export const GET_DEALER_LISTINGS_ID_LIST: QueryOptions<
+  OperationVariables,
+  any
+> = {
+  query: gql`
+    query GetCarIdList {
+      DealerListings(paginate: { page: 1, pageSize: 27 }) {
+        results {
+          id
+        }
+      }
+    }
+  `,
+};
