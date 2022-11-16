@@ -1,10 +1,11 @@
 import type { GetStaticProps, NextPage } from "next";
 
+import client from "apollo-client";
+
 import { GET_DEALER_LISTINGS } from "@/queries/get-dealer-listings";
 
 // custom components
 import Layout from "@/components/layout";
-import client from "apollo-client";
 import Card from "@/components/UI/card";
 
 type DealerListingsType = {
@@ -33,7 +34,6 @@ type HomePagePropsType = {
 };
 
 const Home: NextPage<HomePagePropsType> = ({ data }) => {
-  // console.log("data: ", data);
   return (
     <Layout>
       <section id="cars-for-sale" className="mx-[5%]">
@@ -45,7 +45,7 @@ const Home: NextPage<HomePagePropsType> = ({ data }) => {
             </h1>
           </div>
           {/* Cars List */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-6">
+          <div className="grid grid-cols-1 gap-x-3 gap-y-6 md:grid-cols-2 lg:grid-cols-3">
             {data.map((car) => (
               <Card
                 key={car.id}
@@ -57,7 +57,7 @@ const Home: NextPage<HomePagePropsType> = ({ data }) => {
                 btnTitle={"Enquire Now"}
                 btnOutlineTitle={"View Details"}
               >
-                <div className="my-5 pl-4 grid grid-cols-2 text-lg">
+                <div className="my-5 grid grid-cols-2 pl-4 text-lg">
                   {/* COl 1 */}
                   <ul className="list-disc">
                     <li>{car.kms} KM</li>
