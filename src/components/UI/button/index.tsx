@@ -2,7 +2,7 @@ import React from "react";
 
 type ButtonPropsType = {
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const Button: React.FC<ButtonPropsType> = ({ title, onClick }) => {
