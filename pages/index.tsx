@@ -1,12 +1,20 @@
 import type { GetStaticProps, NextPage } from "next";
+import { useState } from "react";
 
 import client from "apollo-client";
 
-import { GET_DEALER_LISTINGS } from "@/queries/get-dealer-listings";
+import {
+  GET_DEALER_LISTINGS,
+  LOAD_MORE_DEALER_LISTINGS,
+} from "@/queries/get-dealer-listings";
+
+import { useLazyQuery } from "@apollo/client";
 
 // custom components
 import Layout from "@/components/layout";
 import Card from "@/components/UI/card";
+import Button from "@/components/UI/button";
+import Spinner from "@/components/UI/spinner";
 
 type DealerListingsType = {
   colour: string;
@@ -29,11 +37,40 @@ type DealerListingsType = {
   __typename: "DealerListing";
 };
 
-type HomePagePropsType = {
-  data: DealerListingsType[];
+type PageInfoType = {
+  __typename: string;
+  hasNextPage: boolean;
+  currentPage: number;
+  pageCount: number;
+  itemCount: number;
 };
 
-const Home: NextPage<HomePagePropsType> = ({ data }) => {
+type HomePagePropsType = {
+  data: DealerListingsType[];
+  pageInfo: PageInfoType;
+};
+
+const Home: NextPage<HomePagePropsType> = ({ data, pageInfo }) => {
+  const [listings, setListings] = useState<DealerListingsType[]>(data);
+  const [pageInformation, setPageInformation] =
+    useState<PageInfoType>(pageInfo);
+
+  const [fetchMoreListings, { called, loading }] = useLazyQuery(
+    LOAD_MORE_DEALER_LISTINGS.query,
+    {
+      onCompleted: (data) => {
+        setListings((prevListings) => {
+          return [...prevListings, ...data.DealerListings.results];
+        });
+        setPageInformation(data.DealerListings.pageInfo);
+      },
+    }
+  );
+
+  const handleLoadMore = () => {
+    fetchMoreListings({ variables: { page: pageInformation.currentPage + 1 } });
+  };
+
   return (
     <Layout>
       <section id="cars-for-sale" className="mx-[5%]">
@@ -46,7 +83,7 @@ const Home: NextPage<HomePagePropsType> = ({ data }) => {
           </div>
           {/* Cars List */}
           <div className="grid grid-cols-1 gap-x-3 gap-y-6 md:grid-cols-2 lg:grid-cols-3">
-            {data.map((car) => (
+            {listings.map((car) => (
               <Card
                 key={car.id}
                 src={car.image}
@@ -72,6 +109,13 @@ const Home: NextPage<HomePagePropsType> = ({ data }) => {
               </Card>
             ))}
           </div>
+          {/* Load More */}
+          <div className="flex items-center justify-center py-7">
+            {called && loading && <Spinner />}
+            {!loading && pageInformation.hasNextPage && (
+              <Button title="Load More" onClick={handleLoadMore} />
+            )}
+          </div>
         </div>
       </section>
     </Layout>
@@ -86,6 +130,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       data: data.DealerListings.results,
+      pageInfo: data.DealerListings.pageInfo,
     },
   };
 };

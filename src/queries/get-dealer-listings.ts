@@ -3,7 +3,7 @@ import { gql, OperationVariables, QueryOptions } from "@apollo/client";
 export const GET_DEALER_LISTINGS: QueryOptions<OperationVariables, any> = {
   query: gql`
     query GetDealerListings {
-      DealerListings {
+      DealerListings(paginate: { page: 1, pageSize: 9 }) {
         results {
           id
           colour
