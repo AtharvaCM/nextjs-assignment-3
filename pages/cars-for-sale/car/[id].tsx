@@ -1,27 +1,61 @@
-import { GET_CAR_INFO_BY_ID } from "@/queries/get-car-info";
-import { GET_DEALER_LISTINGS_ID_LIST } from "@/queries/get-dealer-listings";
-import client from "apollo-client";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { ParsedUrlQuery } from "querystring";
 import React from "react";
+import { GetStaticPaths, GetStaticProps } from "next";
+
+import client from "apollo-client";
+import { ParsedUrlQuery } from "querystring";
+
+import { GET_DEALER_LISTINGS_ID_LIST } from "@/queries/get-dealer-listings";
+import { GET_CAR_INFO_BY_ID } from "@/queries/get-car-info";
+
+import Layout from "@/components/layout";
+import Car from "@/components/cars-for-sale/car";
 
 type CarPagePropsType = {
   data: {
     DealerListing: {
       __typename: string;
       id: string;
+      odometer: string;
       DealerListingImages: [any];
       RedbookVehicle: any;
     };
   };
 };
 
-const Car: React.FC<CarPagePropsType> = ({ data }) => {
-  console.log("data: ", data);
-  return <div>Car</div>;
+const SingleCar: React.FC<CarPagePropsType> = ({ data }) => {
+  const dealerListing = data.DealerListing;
+  const vehicle = data.DealerListing.RedbookVehicle;
+  const kms = `${dealerListing.odometer} KMs`;
+  const engineInfo = `${vehicle.engineDescription}${
+    vehicle.engineConfigurationDescription === "In-line" ? "i" : ""
+  }, ${dealerListing.RedbookVehicle.cylinders} cyl.`;
+  const powerOutput = `${vehicle.power}kW, ${vehicle.torque}Nm`;
+  const fuel = `${vehicle.vehicle_fuel_type_description} (${vehicle.vehicle_fuel_capacity})`;
+  const driveType = `${vehicle.driveCode}`;
+  const warranty = `${vehicle.vehicle_warranty_years} Yr, ${vehicle.vehicle_warranty_km}KMs`;
+
+  return (
+    <Layout>
+      <section id="car-details" className="mx-[5%]">
+        <div className="mx-auto max-w-[1440px]">
+          <Car
+            images={dealerListing.DealerListingImages}
+            features={{
+              kms,
+              engineInfo,
+              driveType,
+              fuel,
+              powerOutput,
+              warranty,
+            }}
+          />
+        </div>
+      </section>
+    </Layout>
+  );
 };
 
-export default Car;
+export default SingleCar;
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -53,5 +87,5 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const props = { data };
 
-  return { props };
+  return { props, revalidate: 10 };
 };
