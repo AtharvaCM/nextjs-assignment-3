@@ -10,12 +10,28 @@ import { GET_CAR_INFO_BY_ID } from "@/queries/get-car-info";
 import Layout from "@/components/layout";
 import Car from "@/components/cars-for-sale/car";
 
+type CarFeatureDetailsType = {
+  color: string;
+  make: string;
+  mfModelCode: string;
+  model: string;
+  modelYear: number;
+  odometer: string;
+  reg: string;
+  stock: string;
+  variant: string;
+  year: number;
+  vin: string;
+};
+
 type CarPagePropsType = {
   data: {
     DealerListing: {
       __typename: string;
       id: string;
       odometer: string;
+      colour: string;
+      vin: string;
       DealerListingImages: [any];
       RedbookVehicle: any;
     };
@@ -33,6 +49,30 @@ const SingleCar: React.FC<CarPagePropsType> = ({ data }) => {
   const fuel = `${vehicle.vehicle_fuel_type_description} (${vehicle.vehicle_fuel_capacity})`;
   const driveType = `${vehicle.driveCode}`;
   const warranty = `${vehicle.vehicle_warranty_years} Yr, ${vehicle.vehicle_warranty_km}KMs`;
+  const features = {
+    kms,
+    engineInfo,
+    driveType,
+    fuel,
+    powerOutput,
+    warranty,
+  };
+  const featureDetails: CarFeatureDetailsType = {
+    color: dealerListing.colour,
+    make: vehicle.RedbookMake.make,
+    model: vehicle.RedbookFamily.model,
+    mfModelCode: vehicle.modelCode,
+    odometer: dealerListing.odometer,
+    modelYear: vehicle.yearGroup,
+    reg: vehicle.seriesPublic,
+    stock: "NA",
+    variant: `${vehicle.modelName} ${vehicle.engineDescription} ${vehicle.driveCode} ${vehicle.gearTypeDescription}`,
+    vin: dealerListing.vin,
+    year:
+      vehicle.vehicle_series_model_year === null
+        ? "-"
+        : vehicle.vehicle_series_model_year,
+  };
 
   return (
     <Layout>
@@ -40,14 +80,8 @@ const SingleCar: React.FC<CarPagePropsType> = ({ data }) => {
         <div className="mx-auto max-w-[1440px]">
           <Car
             images={dealerListing.DealerListingImages}
-            features={{
-              kms,
-              engineInfo,
-              driveType,
-              fuel,
-              powerOutput,
-              warranty,
-            }}
+            features={features}
+            featureDetails={featureDetails}
           />
         </div>
       </section>
