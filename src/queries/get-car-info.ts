@@ -5,6 +5,8 @@ export const GET_CAR_INFO_BY_ID: QueryOptions<OperationVariables, any> = {
     query GetCarInfoById($id: BigInt!) {
       DealerListing(id: $id) {
         id
+        colour
+        vin
         odometer
         DealerListingImages {
           image_location
@@ -22,6 +24,7 @@ export const GET_CAR_INFO_BY_ID: QueryOptions<OperationVariables, any> = {
           modelCode: vehicle_model_code
           modelName: vehicle_model_code
           yearGroup: vehicle_year_group
+          vehicle_series_model_year
           seriesModelYear: vehicle_series_model_year
           badgeDescription: vehicle_badge_description
           badgeSecondaryDescription: vehicle_badge_secondary_description
