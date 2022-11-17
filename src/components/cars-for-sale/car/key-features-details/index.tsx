@@ -34,40 +34,40 @@ const KeyFeaturesAndDetails: React.FC<KeyFeaturesAndDetailsType> = ({
         {/* Col 1 Inner Grid */}
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
           <div className="bg-slate-100 p-5">Make</div>
-          <div className="bg-slate-100 p-5">{make}</div>
+          <div className="p-5 md:bg-slate-100">{make}</div>
 
-          <div className="p-5">Model</div>
+          <div className="bg-slate-100 p-5 md:bg-white">Model</div>
           <div className="p-5">{model}</div>
 
           <div className="bg-slate-100 p-5">Variant</div>
-          <div className="bg-slate-100 p-5">{variant}</div>
+          <div className="p-5 md:bg-slate-100">{variant}</div>
 
-          <div className="p-5">Color</div>
+          <div className="bg-slate-100 p-5 md:bg-white">Color</div>
           <div className="p-5">{color}</div>
 
           <div className="bg-slate-100 p-5">Manufacturer Model Code</div>
-          <div className="bg-slate-100 p-5">{mfModelCode}</div>
+          <div className="p-5 md:bg-slate-100">{mfModelCode}</div>
 
-          <div className="p-5">Odometer</div>
+          <div className="bg-slate-100 p-5 md:bg-white">Odometer</div>
           <div className="p-5">{odometer}</div>
         </div>
 
         {/* Col 2 Inner Grid */}
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
           <div className="bg-slate-100 p-5">Year</div>
-          <div className="bg-slate-100 p-5">{year}</div>
+          <div className="p-5 md:bg-slate-100">{year}</div>
 
-          <div className="p-5">Model Year</div>
+          <div className="bg-slate-100 p-5 md:bg-white">Model Year</div>
           <div className="p-5">{modelYear}</div>
 
           <div className="bg-slate-100 p-5">Reg</div>
-          <div className="bg-slate-100 p-5">{reg}</div>
+          <div className="p-5 md:bg-slate-100">{reg}</div>
 
-          <div className="p-5">VIN</div>
+          <div className="bg-slate-100 p-5 md:bg-white">VIN</div>
           <div className="p-5">{vin}</div>
 
           <div className="bg-slate-100 p-5">Stock</div>
-          <div className="bg-slate-100 p-5">{stock}</div>
+          <div className="p-5 md:bg-slate-100">{stock}</div>
         </div>
       </div>
     </div>

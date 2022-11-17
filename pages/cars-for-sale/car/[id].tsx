@@ -10,6 +10,13 @@ import { GET_CAR_INFO_BY_ID } from "@/queries/get-car-info";
 import Layout from "@/components/layout";
 import Car from "@/components/cars-for-sale/car";
 
+type TransmissionType = {
+  driveType: string;
+  gears: number;
+  transmissionType: string;
+  gearLocation: string;
+};
+
 type CarFeatureDetailsType = {
   color: string;
   make: string;
@@ -73,6 +80,12 @@ const SingleCar: React.FC<CarPagePropsType> = ({ data }) => {
         ? "-"
         : vehicle.vehicle_series_model_year,
   };
+  const transmission: TransmissionType = {
+    driveType,
+    gearLocation: vehicle.gearLocationDescription,
+    gears: vehicle.gearNum,
+    transmissionType: vehicle.gearTypeDescription,
+  };
 
   return (
     <Layout>
@@ -82,6 +95,7 @@ const SingleCar: React.FC<CarPagePropsType> = ({ data }) => {
             images={dealerListing.DealerListingImages}
             features={features}
             featureDetails={featureDetails}
+            transmission={transmission}
           />
         </div>
       </section>

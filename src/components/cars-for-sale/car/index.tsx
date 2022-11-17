@@ -4,6 +4,7 @@ import Carousel from "@/components/UI/carousel";
 import CarFeaturesList from "./features-list";
 import Accordion from "@/components/UI/accordion";
 import KeyFeaturesAndDetails from "./key-features-details";
+import Transmission from "./transmission";
 
 type CarFeaturesType = {
   kms: string;
@@ -28,13 +29,26 @@ type CarFeatureDetailsType = {
   vin: string;
 };
 
+type TransmissionType = {
+  driveType: string;
+  gears: number;
+  transmissionType: string;
+  gearLocation: string;
+};
+
 type CarType = {
   images: [any];
   features: CarFeaturesType;
+  transmission: TransmissionType;
   featureDetails: CarFeatureDetailsType;
 };
 
-const Car: React.FC<CarType> = ({ images, features, featureDetails }) => {
+const Car: React.FC<CarType> = ({
+  images,
+  features,
+  featureDetails,
+  transmission,
+}) => {
   return (
     <>
       {/* Car Title Container */}
@@ -55,6 +69,7 @@ const Car: React.FC<CarType> = ({ images, features, featureDetails }) => {
           />
         </div>
         {/* Accordian Start */}
+        <hr />
         <Accordion
           title="Key Features & details"
           content={
@@ -70,6 +85,19 @@ const Car: React.FC<CarType> = ({ images, features, featureDetails }) => {
               variant={featureDetails.variant}
               year={featureDetails.year}
               vin={featureDetails.vin}
+            />
+          }
+        />
+
+        <hr />
+        <Accordion
+          title="Transmission"
+          content={
+            <Transmission
+              driveType={transmission.driveType}
+              gearLocation={transmission.gearLocation}
+              gears={transmission.gears}
+              transmissionType={transmission.transmissionType}
             />
           }
         />
