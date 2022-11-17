@@ -5,6 +5,7 @@ export const GET_CAR_INFO_BY_ID: QueryOptions<OperationVariables, any> = {
     query GetCarInfoById($id: BigInt!) {
       DealerListing(id: $id) {
         id
+        odometer
         DealerListingImages {
           image_location
         }
@@ -40,6 +41,7 @@ export const GET_CAR_INFO_BY_ID: QueryOptions<OperationVariables, any> = {
           camDescription: vehicle_cam_description
           fuelDeliveryDescription: vehicle_fuel_delivery_description
           power: vehicle_power
+          torque: vehicle_torque
           powerRpmFrom: vehicle_power_rpmfrom
           powerRpmTo: vehicle_power_rpmto
           acceleration: vehicle_acceleration
@@ -67,6 +69,15 @@ export const GET_CAR_INFO_BY_ID: QueryOptions<OperationVariables, any> = {
           tareMass: vehicle_tare_mass
           grossVehicleMass: vehicle_gross_vehicle_mass
           grossCombinationMass: vehicle_gross_combination_mass
+          vehicle_fuel_type_description
+          vehicle_fuel_capacity
+          vehicle_fuel_urban
+          vehicle_fuel_combined
+          vehicle_average_km
+          vehicle_drive_description
+          vehicle_c_manufacturer_drive
+          vehicle_warranty_years
+          vehicle_warranty_km
         }
       }
     }
