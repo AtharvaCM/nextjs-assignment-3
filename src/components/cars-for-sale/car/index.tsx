@@ -1,59 +1,21 @@
 import React from "react";
 
+import {
+  CarFeatureDetailsType,
+  CarFeaturesType,
+  DimensionsPropsType,
+  TransmissionType,
+} from "@/types/index";
+
+import Accordion from "@/components/UI/accordion";
 import Carousel from "@/components/UI/carousel";
 import CarFeaturesList from "./features-list";
-import Accordion from "@/components/UI/accordion";
+import Dimensions from "./dimensions";
 import KeyFeaturesAndDetails from "./key-features-details";
 import Transmission from "./transmission";
-import Dimensions from "./dimensions";
-
-type CarFeaturesType = {
-  kms: string;
-  engineInfo: string;
-  powerOutput: string;
-  fuel: string;
-  driveType: string;
-  warranty: string;
-};
-
-type CarFeatureDetailsType = {
-  color: string;
-  make: string;
-  mfModelCode: string;
-  model: string;
-  modelYear: number;
-  odometer: string;
-  reg: string;
-  stock: string;
-  variant: string;
-  year: number;
-  vin: string;
-};
-
-type TransmissionType = {
-  driveType: string;
-  gears: number;
-  transmissionType: string;
-  gearLocation: string;
-};
-
-type DimensionsPropsType = {
-  wheelBase: string;
-  height: string;
-  length: string;
-  width: string;
-  frontWheels: string;
-  frontTyres: string;
-  rearWheels: string;
-  rearTyres: string;
-  kerbWeight: string;
-  tareMass: string;
-  grossVehicleMass: string;
-  grossCombinationMass: string;
-};
 
 type CarType = {
-  images: [any];
+  images: { image_location: string; __typename: string }[];
   features: CarFeaturesType;
   transmission: TransmissionType;
   featureDetails: CarFeatureDetailsType;
