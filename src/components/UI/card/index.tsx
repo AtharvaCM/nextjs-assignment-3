@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 import Button from "../button";
 import ButtonOutline from "../button-outline";
@@ -26,13 +25,6 @@ const Card: React.FC<CardPropsType> = ({
   btnTitle,
   btnOutlineTitle,
 }) => {
-  const router = useRouter();
-  let domain = "http://localhost:3000";
-
-  if (typeof window !== "undefined") {
-    domain = window.location.href;
-  }
-
   return (
     <div className="flex justify-center">
       <div className="flex max-w-sm flex-1 flex-col rounded-lg bg-white shadow-lg">
@@ -62,14 +54,8 @@ const Card: React.FC<CardPropsType> = ({
         </div>
         {/* Card Actions */}
         <div className="mt-auto flex justify-between px-6 pb-6">
-          <Button
-            title={btnTitle}
-            onClick={() => router.push(`${domain}${href}`)}
-          />
-          <ButtonOutline
-            title={btnOutlineTitle}
-            onClick={() => router.push(`${domain}${href}`)}
-          />
+          <Button title={btnTitle} />
+          <ButtonOutline title={btnOutlineTitle} />
         </div>
       </div>
     </div>
