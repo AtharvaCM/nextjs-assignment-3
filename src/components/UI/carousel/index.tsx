@@ -26,7 +26,12 @@ const Carousel: React.FC<CarouselPropsType> = ({ images }) => {
               selectedImg === index ? "active" : ""
             }`}
           >
-            <img src={image.image_location} className="block w-full" alt="" />
+            <img
+              role={"img"}
+              src={image.image_location}
+              className="block w-full"
+              alt=""
+            />
           </div>
         ))}
       </div>
