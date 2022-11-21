@@ -17,6 +17,21 @@ type TransmissionType = {
   gearLocation: string;
 };
 
+type DimensionsPropsType = {
+  wheelBase: string;
+  height: string;
+  length: string;
+  width: string;
+  frontWheels: string;
+  frontTyres: string;
+  rearWheels: string;
+  rearTyres: string;
+  kerbWeight: string;
+  tareMass: string;
+  grossVehicleMass: string;
+  grossCombinationMass: string;
+};
+
 type CarFeatureDetailsType = {
   color: string;
   make: string;
@@ -65,26 +80,37 @@ const SingleCar: React.FC<CarPagePropsType> = ({ data }) => {
     warranty,
   };
   const featureDetails: CarFeatureDetailsType = {
-    color: dealerListing.colour,
-    make: vehicle.RedbookMake.make,
-    model: vehicle.RedbookFamily.model,
-    mfModelCode: vehicle.modelCode,
-    odometer: dealerListing.odometer,
-    modelYear: vehicle.yearGroup,
-    reg: vehicle.seriesPublic,
-    stock: "NA",
+    color: dealerListing.colour ?? "-",
+    make: vehicle.RedbookMake.make ?? "-",
+    model: vehicle.RedbookFamily.model ?? "-",
+    mfModelCode: vehicle.modelCode ?? "-",
+    odometer: dealerListing.odometer ?? "-",
+    modelYear: vehicle.yearGroup ?? "-",
+    reg: vehicle.seriesPublic ?? "-",
+    stock: "-",
     variant: `${vehicle.modelName} ${vehicle.engineDescription} ${vehicle.driveCode} ${vehicle.gearTypeDescription}`,
-    vin: dealerListing.vin,
-    year:
-      vehicle.vehicle_series_model_year === null
-        ? "-"
-        : vehicle.vehicle_series_model_year,
+    vin: dealerListing.vin ?? "-",
+    year: vehicle.vehicle_series_model_year ?? "-",
   };
   const transmission: TransmissionType = {
-    driveType,
-    gearLocation: vehicle.gearLocationDescription,
-    gears: vehicle.gearNum,
-    transmissionType: vehicle.gearTypeDescription,
+    driveType: driveType ?? "-",
+    gearLocation: vehicle.gearLocationDescription ?? "-",
+    gears: vehicle.gearNum ?? "-",
+    transmissionType: vehicle.gearTypeDescription ?? "-",
+  };
+  const dimensions: DimensionsPropsType = {
+    wheelBase: vehicle.wheelbase ?? "-",
+    height: vehicle.vehicle_height ?? "-",
+    length: vehicle.vehicle_length ?? "-",
+    width: vehicle.vehicle_width ?? "-",
+    frontWheels: vehicle.frontRimDesc ?? "-",
+    frontTyres: vehicle.frontTyreSize ?? "-",
+    rearWheels: vehicle.rearRimDesc ?? "-",
+    rearTyres: vehicle.rearTyreSize ?? "-",
+    kerbWeight: vehicle.kerbWeight ?? "-",
+    tareMass: vehicle.tareMass ?? "-",
+    grossVehicleMass: vehicle.grossVehicleMass ?? "-",
+    grossCombinationMass: vehicle.grossCombinationMass ?? "-",
   };
 
   return (
@@ -96,6 +122,7 @@ const SingleCar: React.FC<CarPagePropsType> = ({ data }) => {
             features={features}
             featureDetails={featureDetails}
             transmission={transmission}
+            dimensions={dimensions}
           />
         </div>
       </section>

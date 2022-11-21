@@ -5,6 +5,7 @@ import CarFeaturesList from "./features-list";
 import Accordion from "@/components/UI/accordion";
 import KeyFeaturesAndDetails from "./key-features-details";
 import Transmission from "./transmission";
+import Dimensions from "./dimensions";
 
 type CarFeaturesType = {
   kms: string;
@@ -36,11 +37,27 @@ type TransmissionType = {
   gearLocation: string;
 };
 
+type DimensionsPropsType = {
+  wheelBase: string;
+  height: string;
+  length: string;
+  width: string;
+  frontWheels: string;
+  frontTyres: string;
+  rearWheels: string;
+  rearTyres: string;
+  kerbWeight: string;
+  tareMass: string;
+  grossVehicleMass: string;
+  grossCombinationMass: string;
+};
+
 type CarType = {
   images: [any];
   features: CarFeaturesType;
   transmission: TransmissionType;
   featureDetails: CarFeatureDetailsType;
+  dimensions: DimensionsPropsType;
 };
 
 const Car: React.FC<CarType> = ({
@@ -48,6 +65,7 @@ const Car: React.FC<CarType> = ({
   features,
   featureDetails,
   transmission,
+  dimensions,
 }) => {
   return (
     <>
@@ -98,6 +116,27 @@ const Car: React.FC<CarType> = ({
               gearLocation={transmission.gearLocation}
               gears={transmission.gears}
               transmissionType={transmission.transmissionType}
+            />
+          }
+        />
+
+        <hr />
+        <Accordion
+          title="Dimensions"
+          content={
+            <Dimensions
+              frontTyres={dimensions.frontTyres}
+              frontWheels={dimensions.frontWheels}
+              height={dimensions.height}
+              width={dimensions.width}
+              length={dimensions.length}
+              wheelBase={dimensions.wheelBase}
+              grossVehicleMass={dimensions.grossVehicleMass}
+              grossCombinationMass={dimensions.grossCombinationMass}
+              kerbWeight={dimensions.kerbWeight}
+              rearTyres={dimensions.rearTyres}
+              rearWheels={dimensions.rearWheels}
+              tareMass={dimensions.tareMass}
             />
           }
         />
