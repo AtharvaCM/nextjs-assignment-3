@@ -25,4 +25,19 @@ describe("Accordion", () => {
 
     expect(accordionTitle).toBeInTheDocument();
   });
+
+  it("Renders Accordion with passed content", () => {
+    render(
+      <Accordion
+        title=""
+        content={<h1 role={"heading"}>Sample content</h1>}
+      ></Accordion>
+    );
+
+    const accordionContent = screen.getByRole("heading", {
+      name: /Sample content/i,
+    });
+
+    expect(accordionContent).toBeInTheDocument();
+  });
 });
