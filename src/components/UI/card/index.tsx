@@ -27,6 +27,11 @@ const Card: React.FC<CardPropsType> = ({
   btnOutlineTitle,
 }) => {
   const router = useRouter();
+  let domain = "http://localhost:3000";
+
+  if (typeof window !== "undefined") {
+    domain = window.location.href;
+  }
 
   return (
     <div className="flex justify-center">
@@ -57,10 +62,13 @@ const Card: React.FC<CardPropsType> = ({
         </div>
         {/* Card Actions */}
         <div className="mt-auto flex justify-between px-6 pb-6">
-          <Button title={btnTitle} onClick={() => router.push(href)} />
+          <Button
+            title={btnTitle}
+            onClick={() => router.push(`${domain}${href}`)}
+          />
           <ButtonOutline
             title={btnOutlineTitle}
-            onClick={() => router.push(href)}
+            onClick={() => router.push(`${domain}${href}`)}
           />
         </div>
       </div>
