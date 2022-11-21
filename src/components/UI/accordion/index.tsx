@@ -24,18 +24,26 @@ const Accordion: React.FC<AccordionProps> = ({ title, content }) => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" data-testid="accordion">
       <button
         className="box-border flex cursor-pointer appearance-none items-center justify-between py-6 focus:outline-none"
         onClick={toggleAccordion}
+        role={"button"}
       >
-        <p className="text-footnote light inline-block">{title}</p>
+        <p
+          className="text-footnote light inline-block"
+          role={"heading"}
+          aria-level={4}
+        >
+          {title}
+        </p>
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Feather-arrows-chevron-up.svg"
           alt="Chevron icon"
           height={50}
           width={50}
           className={`${rotate} inline-block`}
+          role={"img"}
         />
       </button>
       <div
