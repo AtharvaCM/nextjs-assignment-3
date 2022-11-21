@@ -108,7 +108,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await client.query(GET_DEALER_LISTINGS_ID_LIST);
-  const arr: { id: string }[] = data.DealerListings.results;
+  const arr: { id: string }[] = data?.DealerListings?.results;
   const paths = arr.map((listing) => {
     return {
       params: { id: listing.id.toString() },
