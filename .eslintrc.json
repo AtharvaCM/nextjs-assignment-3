@@ -12,7 +12,8 @@
           ["@/components/*", "./src/components/*"],
           ["@/pages/*", "./pages"],
           ["@/styles/*", "./src/styles/*"],
-          ["@/queries/*", "./src/queries/*"]
+          ["@/queries/*", "./src/queries/*"],
+          ["@/types/*", "./src/types/*"]
         ],
         "extensions": [".js", ".jsx", ".svg", ".png", ".ts", ".tsx"]
       }

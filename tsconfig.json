@@ -62,7 +62,9 @@
       "@/styles/*": ["src/styles/*"],
       "@/styles/": ["src/styles/index"],
       "@/queries/*": ["src/queries/*"],
-      "@/queries/": ["src/queries/index"]
+      "@/queries/": ["src/queries/index"],
+      "@/types/*": ["src/types/*"],
+      "@/types/": ["src/types/index"]
     },
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
