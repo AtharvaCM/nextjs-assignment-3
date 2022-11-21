@@ -10,7 +10,7 @@ import client from "apollo-client";
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     async function loadData() {
-      await import("tw-elements");
+      await require("tw-elements");
     }
     loadData();
   }, []);
