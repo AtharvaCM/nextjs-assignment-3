@@ -32,7 +32,7 @@ const Card: React.FC<CardPropsType> = ({
       <div className="flex max-w-sm flex-1 flex-col rounded-lg bg-white shadow-lg">
         {/* Image */}
         <div>
-          <Link href={href}>
+          <Link role={"link"} href={href}>
             <a data-mdb-ripple="true" data-mdb-ripple-color="light">
               <figure className="h-[13rem]" role={"figure"}>
                 <img
@@ -43,13 +43,19 @@ const Card: React.FC<CardPropsType> = ({
               </figure>
             </a>
           </Link>
-          <span className="absolute mt-[-1rem] bg-black p-1 text-white">
+          <span
+            className="absolute mt-[-1rem] bg-black p-1 text-white"
+            data-testid="card-price"
+          >
             ${price}
           </span>
         </div>
         {/* Content */}
         <div className="flex-1 px-6 pt-6">
-          <h5 className="mb-2 text-xl font-medium text-gray-900">
+          <h5
+            role={"heading"}
+            className="mb-2 text-xl font-medium text-gray-900"
+          >
             {cardTitle}
           </h5>
           {children}
