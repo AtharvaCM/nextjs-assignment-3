@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import Button from "../button";
 import ButtonOutline from "../button-outline";
+import { useRouter } from "next/router";
 
 type CardPropsType = {
   src: string;
@@ -25,6 +26,7 @@ const Card: React.FC<CardPropsType> = ({
   btnTitle,
   btnOutlineTitle,
 }) => {
+  const router = useRouter();
   return (
     <div className="flex justify-center">
       <div className="flex max-w-sm flex-1 flex-col rounded-lg bg-white shadow-lg">
@@ -55,7 +57,10 @@ const Card: React.FC<CardPropsType> = ({
         {/* Card Actions */}
         <div className="mt-auto flex justify-between px-6 pb-6">
           <Button title={btnTitle} />
-          <ButtonOutline title={btnOutlineTitle} />
+          <ButtonOutline
+            title={btnOutlineTitle}
+            onClick={() => router.push(href)}
+          />
         </div>
       </div>
     </div>
