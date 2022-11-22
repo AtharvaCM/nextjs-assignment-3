@@ -38,7 +38,7 @@ const Accordion: React.FC<AccordionProps> = ({ title, content }) => {
           {title}
         </p>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Feather-arrows-chevron-up.svg"
+          src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Feather-arrows-chevron-down.svg"
           alt="Chevron icon"
           height={50}
           width={50}
